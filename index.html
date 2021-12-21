@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    Cats VS Dogs
+    <p>
+      <img src="https://api.thecatapi.com/v1/images/search?format=src&size=full" onclick="catvotes()" height="200px" width="200px"> 
+        <img src="https://api.thedogapi.com/v1/images/search?format=src&size=full" onclick="dogvotes()" height="200px" width="200px"> 
+        </p>
+        <p>  Cat Votes : <span id=catvotes> </span> </p>
+        <p>Dog Votes : <span id=dogvotes> </span>
+          </p>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-database.js"></script>
+
+<script>
+
+  const firebaseConfig = {
+  apiKey: "AIzaSyBSqpiSo1uZl2nM0ZLO-RhorGih3pn8J9U",
+  authDomain: "data-hw-14bcf.firebaseapp.com",
+  databaseURL: "https://data-hw-14bcf-default-rtdb.firebaseio.com",
+  projectId: "data-hw-14bcf",
+  storageBucket: "data-hw-14bcf.appspot.com",
+  messagingSenderId: "429672862879",
+  appId: "1:429672862879:web:4419e1ff654b3b632fbeaa"
+};
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+function catvotes(){
+var visitsRef =  firebase.database().ref('catvotes');
+visitsRef.once('value', function (snapshot) {
+    var visits = snapshot.val();
+    visits++;
+    visitsRef.set(visits);
+    document.getElementById("catvotes").innerHTML = visits;
+});}
+
+
+
+
+
+function dogvotes(){
+var visitsRef =  firebase.database().ref('dogvotes');
+visitsRef.once('value', function (snapshot) {
+    var visits = snapshot.val();
+    visits++;
+    visitsRef.set(visits);
+    document.getElementById("dogvotes").innerHTML = visits;
+});
+}
+
+</script>
+    <script src="script.js"></script>
+  </body>
+</html>
